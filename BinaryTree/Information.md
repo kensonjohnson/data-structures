@@ -113,7 +113,7 @@ And we can show this in code:
 // The index of node 3 is 2
 const i = 2;
 const node3 = binaryTree.children[index]; // Node 3 is at index 2
-const parent = (i - 1) / 2; // (2 - 1) / 2 = 0.5, which is tuncated to 0
+const parent = Math.floor((i - 1) / 2); // (2 - 1) / 2 = 0.5, which is tuncated to 0
 const leftChild = i * 2 + 1; // (2 * 2) + 1 = 5
 const rightChild = i * 2 + 2; // (2 * 2) + 2 = 6
 ```
