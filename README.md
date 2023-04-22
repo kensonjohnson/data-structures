@@ -14,7 +14,7 @@ This setup assumes you already have Node 16 or greater installed.
 ### Clone the Repo
 
 ```bash
-git clone https://github.com/kensonjohnson/data-structures.git
+git clone https://github.com/kensonjohnson/data-structures-and-algorithms.git
 ```
 
 &nbsp;
@@ -22,7 +22,7 @@ git clone https://github.com/kensonjohnson/data-structures.git
 ### Navigate to Project and Install Packages
 
 ```bash
-cd data-structures
+cd data-structures-and-algorithms
 npm install
 ```
 
@@ -33,5 +33,9 @@ npm install
 Whenever you want to run any file, just use `ts-node` to run the JIT compiler:
 
 ```bash
+# running file in the current directory
 npx ts-node file.ts
+
+# running file using it's path
+npx ts-node path/to/the/file.ts
 ```
