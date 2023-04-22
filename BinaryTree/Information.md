@@ -32,7 +32,7 @@ This tree would NOT be complete if node 4 was missing, which would create a "gap
 
 A "normal" way to store a tree is called "Record and Reference," which just means we have nodes that point to other nodes by "reference."
 The node is the "record."
-A node stored in a tree using this structure could look something like this:
+A node stored in a tree using a structure could look like this:
 
 ```javascript
 class TreeNode {
@@ -43,7 +43,7 @@ class TreeNode {
 }
 ```
 
-And inside of that `children` array, you have all of the references to all the nodes underneath this one.
+Inside of that `children` array, you have all of the references to all the nodes underneath this one.
 With a binary tree, things are even more simple:
 
 ```javascript
@@ -73,12 +73,14 @@ class TreeNode {
 ```
 
 This is how we implement our nodes in this project.
-Looking at the typing at the top of the class, our `left` and our `right` properties can either be another `TreeNode` or `null` when one isn't there.
+Looking at the typing at the top of the class, our `left` and our `right` properties can either be another `TreeNode` or `null` when it doesn't point to anything.
 In our implementation we also limited the value to either numbers or strings.
 
 &nbsp;
 
 ### Implicitly Storing a Data Structure in an Array
+
+**_This section is optional learning and can be skipped_**
 
 We can lean on the fact that each node has only two children to store our tree another way: in an `Array`.
 This might seem a little far-fetched at first, but hear me out.
