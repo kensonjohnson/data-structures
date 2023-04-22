@@ -1,0 +1,16 @@
+{
+  "name": "data-structures",
+  "version": "1.0.0",
+  "description": "A repository of data structures made from scratch.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kenson Johnson",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.15.13",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
+}
