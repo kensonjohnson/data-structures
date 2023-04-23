@@ -127,5 +127,105 @@ There are some tradeoffs to using this method:
 - Lookup and traversal are pretty quick
 
 But there is a different kind of overhead that goes into dealing with this implicit structure when compared to the "Record and Reference" method.
-In our implementation we went for the R&R method, so you can ignore all of this for now.
+In our implementation we went with R&R, so you can ignore all of this for now.
 But, this is still a great topic and we will explore it some more when we create Priority Queues.
+
+## Implementation
+
+As said before, we are going to be using nodes with references to other nodes as our structure.
+We have already made the decision to limit the data in the nodes to either numbers or strings.
+And finally, our implementation does not currently accept any arguments into it's constructor.
+That leaves us with a file that looks like this:
+
+```typescript
+class TreeNode {
+  value: number | string;
+  right: null | TreeNode;
+  left: null | TreeNode;
+
+  constructor(value: number | string) {
+    this.value = value;
+    this.right = null;
+    this.left = null;
+  }
+}
+
+class BinaryTree {
+  root: null | TreeNode;
+  size: number;
+
+  constructor() {
+    this.root = null;
+    this.size = 0;
+  }
+}
+```
+
+### Insert
+
+The first thing we probably want to implement is adding new nodes to the binary tree.
+To make this work, we need to know how to traverse a tree.
+Traversal broadly boils down to Depth-First (DFS) and Breadth-First (BFS).
+From there, we can break down BFS into three more types named Pre-Order, In-Order, and Post-Order traversal.
+For now, we're going to focus on the Breadth-First option, which we call Level-Order traversal.
+In level order traversal, we explore an entire level (usually from left and right) before we move on to the next level below.
+
+![An Incomplete Binary Tree](images/level_order.svg "Incomplete Binary Tree")
+
+Why do we need to know this?
+Well, when we add a new node to the tree, we need to make sure we fill the first available spot.
+Using level order traversal means that we can check that each level is full before moving on to the next.
+If all of the levels are filled, it adds the new node to the last level in the first available spot.
+
+We implement level order (BFS) traversal by using a queue.
+We start with the root node and queue up it's children, nodes 2 and 3.
+We grab the next in the queue, node 2, and queue up it's children as well.
+We grab node 3, queue it's children, and so on, and so on.
+The important part is that as soon as we find a missing child (set to `null`), we are done searching.
+We can just add the new node there.
+
+Now, to simplify things for our tree, we are going to assume that any deletions will "fill-in" any gaps.
+We will go over what that means when we implement deleteOne and deleteAll.
+For now, we just look for the first available spot at the bottom of the tree and add our new node there:
+
+```typescript
+// Insert
+  insert(value: number | string) {
+    // check for null
+    if (value === null || typeof value === "undefined") {
+      return false;
+    }
+    const newNode = new TreeNode(value);
+
+    // check if Tree is empty
+    if (this.size <= 0) {
+      // if yes, make new node the root and return
+      this.root = newNode;
+      this.size = 1;
+      return true;
+    }
+
+    // otherwise, place in left most bottom spot
+    // Use level order traversal to find first empty node
+    const queue: TreeNode[] = [];
+    queue.push(this.root as TreeNode);
+    while (queue.length) {
+      const currentNode = queue.shift() as TreeNode;
+      if (currentNode.left) {
+        queue.push(currentNode.left);
+      } else {
+        currentNode.left = newNode;
+        this.size++;
+        return true;
+      }
+
+      if (currentNode.right) {
+        queue.push(currentNode.right);
+      } else {
+        currentNode.right = newNode;
+        this.size++;
+        return true;
+      }
+    }
+  }
+```
