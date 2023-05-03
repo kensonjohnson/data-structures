@@ -97,12 +97,15 @@ class BinaryTree {
 
         // Searching for the rightmost and lowest node in subtree
         let replacementNode = node;
+        let replacementNodeOldParent: null | TreeNode = null;
         while (true) {
           if (replacementNode.right) {
+            replacementNodeOldParent = replacementNode;
             replacementNode = replacementNode.right;
             continue;
           }
           if (replacementNode.left) {
+            replacementNodeOldParent = replacementNode;
             replacementNode = replacementNode.left;
             continue;
           }
