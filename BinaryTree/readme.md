@@ -1,7 +1,25 @@
 # Binary Tree Information
 
+&nbsp;
+&nbsp;
+
 This document is in no way an end-all-be-all conversaion about binary trees, but it can serve as a reference to decisions made when creating the BinaryTree class in this repository.
 There is still some good information in this document and is worth the read.
+
+&nbsp;
+&nbsp;
+
+## Table of Contents
+
+- [What is a Binary Tree](#what-is-a-binary-tree)
+- [How Do We Store a Binary Tree](#how-do-we-store-a-binary-tree)
+  - [Records and Reference](#records-and-reference)
+  - [Implicitly](#implicitly-storing-a-data-structure-in-an-array)
+- [Implementation](#implementation)
+  - [Insert](#insert)
+
+&nbsp;
+&nbsp;
 
 ## What is a Binary Tree?
 
@@ -14,11 +32,17 @@ When a tree is filled in this manner of top-down left to right, we call it "comp
 
 ![A Completed Binary Tree](images/completed_binary_tree.svg "Completed Binary Tree")
 
+&nbsp;
+&nbsp;
+
 This tree would still be complete if nodes 5, 6, and 7 were missing, because it would still be filled from left to right.
 
 ![A Completed Binary Tree](images/completed_binary_tree_2.svg "Completed Binary Tree 2")
 
 ![A Completed Binary Tree](images/completed_binary_tree_3.svg "Completed Binary Tree 3")
+
+&nbsp;
+&nbsp;
 
 This tree would NOT be complete if node 4 was missing, which would create a "gap" in our left to right fill of the level.
 
@@ -26,7 +50,7 @@ This tree would NOT be complete if node 4 was missing, which would create a "gap
 
 &nbsp;
 
-## How Do We Store A Binary Tree?
+## How Do We Store a Binary Tree?
 
 ### Records and Reference
 
@@ -43,6 +67,9 @@ class TreeNode {
 }
 ```
 
+&nbsp;
+&nbsp;
+
 Inside of that `children` array, you have all of the references to all the nodes underneath this one.
 With a binary tree, things are even more simple:
 
@@ -55,6 +82,9 @@ class TreeNode {
   }
 }
 ```
+
+&nbsp;
+&nbsp;
 
 In this case, we only have two references to keep track of: the `left` and `right` children. Let's look at the TypeScript version:
 
@@ -72,6 +102,9 @@ class TreeNode {
 }
 ```
 
+&nbsp;
+&nbsp;
+
 This is how we implement our nodes in this project.
 Looking at the typing at the top of the class, our `left` and our `right` properties can either be another `TreeNode` or `null` when it doesn't point to anything.
 In our implementation we also limited the value to either numbers or strings.
@@ -79,6 +112,9 @@ In our implementation we also limited the value to either numbers or strings.
 &nbsp;
 
 ### Implicitly Storing a Data Structure in an Array
+
+&nbsp;
+&nbsp;
 
 **_This section is optional learning and can be skipped_**
 
